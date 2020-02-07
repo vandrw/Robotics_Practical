@@ -58,7 +58,7 @@ def create_msg(left_wheel, right_wheel):
 
 
 def broadcast():
-    pub = rospy.Publisher('command', Velocities, queue_size=1)
+    pub = rospy.Publisher('velocities', Velocities, queue_size=1)
     rate = rospy.Rate(20)
     
     while rospy.is_shutdown():
@@ -77,10 +77,10 @@ def broadcast():
             right_val += 0.5
             left_val += 0.5
         elif keyp == 'a':
-            right_val -= 0.25
-            left_val += 0.25
-            if (right_val < 0):
-                right_val = 0
+            right_val += 0.25
+            left_val -= 0.25
+            if (left_val < 0):
+                left_val = 0
         elif keyp == 's':
             if ((left_val < 0) and (right_val > 0)):
                 left_val = 0
@@ -91,10 +91,10 @@ def broadcast():
             right_val -= 0.5
             left_val -= 0.5
         elif keyp == 'd':
-            right_val += 0.25
-            left_val -= 0.25
-            if (left_val < 0):
-                left_val = 0
+            right_val -= 0.25
+            left_val += 0.25
+            if (right_val < 0):
+                right_val = 0
         elif keyp == ' ':
             right_val = 0
             left_val = 0
