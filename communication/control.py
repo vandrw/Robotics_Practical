@@ -3,10 +3,10 @@ import sys
 import os
 from my_msgs.msg import Velocities
 
-class Velocities:
-    def __init__(self):
-        self.left_wheel = 0
-        self.right_wheel = 0
+# class Velocities:
+#     def __init__(self):
+#         self.left_wheel = 0
+#         self.right_wheel = 0
 
 class _Getch:
     """Gets a single character from standard input.  Does not echo to the
