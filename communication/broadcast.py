@@ -1,9 +1,6 @@
 import rospy
 import time
-from std_msgs import String
-
-pub = rospy.Publisher('command', String, queue_size=1)
-sub = rospy.Subscriber('feedback', String, callback)
+from std_msgs.msg import String
 
 def create_msg(string):
     msg = String()
@@ -36,9 +33,8 @@ def broadcast():
     pub.publish(create_msg("count"))
     rate.sleep()
     
-    # while not rospy.is_shutdown():
-    #     pub.publish(create_msg("both", 1))
-    #     rate.sleep()
+pub = rospy.Publisher('command', String, queue_size=1)
+sub = rospy.Subscriber('feedback', String, callback)
         
 if __name__ == "__main__":
     rospy.init_node("broadcast")
