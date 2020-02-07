@@ -1,20 +1,20 @@
 import rospy
 from my_msgs.msg import Velocities
 
-def create_msg(wheels):
+def create_msg(wheels, speed):
     msg = Velocities()
     if wheels == "both":
-        msg.left_vel = 10        # PLACEHOLDERS!
-        msg.right_vel = 10
+        msg.left_wheel = speed
+        msg.right_wheel = speed
     elif wheels == "left":
-        msg.left_vel = 10
-        msg.right_vel = 0
+        msg.left_wheel = speed
+        msg.right_wheel = 0
     elif wheels == "right":
-        msg.left_vel = 0
-        msg.right_vel = 10
+        msg.left_wheel = 0
+        msg.right_wheel = speed
     else:
-        msg.left_vel = 0
-        msg.right_vel = 0
+        msg.left_wheel = 0
+        msg.right_wheel = 0
 
     return msg
 
@@ -23,7 +23,7 @@ def publisher_broadcast():
     rate = rospy.Rate(20)
     
     while not rospy.is_shutdown():
-        pub.publish(create_msg("both"))
+        pub.publish(create_msg("both", 1))
         rate.sleep()
         
 if __name__ == "__main__":
