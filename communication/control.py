@@ -3,11 +3,6 @@ import sys
 import os
 from my_msgs.msg import Velocities
 
-# class Velocities:
-#     def __init__(self):
-#         self.left_wheel = 0
-#         self.right_wheel = 0
-
 class _Getch:
     """Gets a single character from standard input.  Does not echo to the
 screen."""
@@ -68,17 +63,16 @@ def broadcast():
     left_val = 0
     
     while not rospy.is_shutdown():
-    # while True:
         keyp = getch()
         
-        print(keyp)
+        print("Key Pressed: ", keyp)
         
         if keyp == 'w':
-            right_val += 0.5
-            left_val += 0.5
+            right_val += 0.2
+            left_val += 0.2
         elif keyp == 'a':
-            right_val += 0.25
-            left_val -= 0.25
+            right_val += 0.15
+            left_val -= 0.15
             if (left_val < 0):
                 left_val = 0
         elif keyp == 's':
@@ -88,11 +82,11 @@ def broadcast():
             if ((left_val > 0) and (right_val < 0)):
                 right_val = 0
 
-            right_val -= 0.5
-            left_val -= 0.5
+            right_val -= 0.2
+            left_val -= 0.2
         elif keyp == 'd':
-            right_val -= 0.25
-            left_val += 0.25
+            right_val -= 0.15
+            left_val += 0.15
             if (right_val < 0):
                 right_val = 0
         elif keyp == ' ':
@@ -103,7 +97,16 @@ def broadcast():
         else:
             pass
         
-        # create_msg(left_val, right_val)
+        if (left_val > 1):
+            left_val = 1
+        if (levt_val < -1):
+            left_val = -1
+        
+        if (right_val > 1):
+            right_val = 1
+        if (levt_val < -1):
+            right_val = -1
+
         pub.publish(create_msg(left_val, right_val))
     
 if __name__ == "__main__":
