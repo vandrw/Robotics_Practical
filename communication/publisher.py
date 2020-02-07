@@ -19,7 +19,7 @@ def create_msg(wheels):
     return msg
 
 def publisher_broadcast():
-    pub_left = rosply.Publisher('cool_board', Velocities, queue_size=1)
+    pub_left = rospy.Publisher('cool_board', Velocities, queue_size=1)
     rate = rospy.Rate(20)
     
     while not rospy.is_shutdown():
