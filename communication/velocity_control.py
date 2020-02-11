@@ -29,7 +29,7 @@ def determine_wheel_command(translational, rotational):
     body velocities. Where translational is the forward speed in m/s and
     rotational the rotational speed around the z axis in rads/s.
     '''
-    left_wheel_vel  = (2* cur_config['translational'] + track * cur_config['rotational']) / (2 * wheel_radius) 
+    left_wheel_vel  = (2* cur_config['translational'] - track * cur_config['rotational']) / (2 * wheel_radius) 
     right_wheel_vel = (2* cur_config['translational'] + track * cur_config['rotational']) / (2 * wheel_radius)
 
     return left_wheel_vel, right_wheel_vel
