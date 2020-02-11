@@ -16,9 +16,9 @@ track = 0.108  #distance between the wheels
 
 #### **************  Put your tuned PID values here ************************************** 
 cur_config = {}
-cur_config['k_P'] = 0   #put your tuned PID values here
-cur_config['k_I'] = 0   #put your tuned PID values here
-cur_config['k_D'] = 0   #put your tuned PID values here
+cur_config['k_P'] = 180   #put your tuned PID values here
+cur_config['k_I'] = 150   #put your tuned PID values here
+cur_config['k_D'] = 120   #put your tuned PID values here
 cur_config['translational'] = 0
 cur_config['rotational'] = 0
 
@@ -31,7 +31,16 @@ def determine_wheel_command(translational, rotational):
     '''
     left_wheel_vel  = (2* cur_config['translational'] - track * cur_config['rotational']) / (2 * wheel_radius) 
     right_wheel_vel = (2* cur_config['translational'] + track * cur_config['rotational']) / (2 * wheel_radius)
-
+    
+    if (left_wheel_vel > 1):
+        left_wheel_vel = 1
+    if (right_wheel_vel > 1):
+        right_wheel_vel = 1
+    if (left_wheel_vel < -1):
+        left_wheel_vel = -1
+    if (right_wheel_vel < -1):
+        right_wheel_vel = -1
+         
     return left_wheel_vel, right_wheel_vel
 
 
